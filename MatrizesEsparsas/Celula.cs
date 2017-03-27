@@ -13,10 +13,20 @@ namespace MatrizesEsparsas
         private int linha, coluna;
         private double valor;
 
-       /// <summary>
-       /// Celula a direita do this na matriz
-       /// </summary>
-       public Celula Direita
+        
+        public Celula(double v, int l, int c, Celula dir,Celula abx)
+        {
+            this.Abaixo = abx;
+            this.Coluna = c;
+            this.Direita = dir;
+            this.Valor = v;
+            this.Linha = l;
+        }
+        
+        /// <summary>
+        /// Celula a direita do this na matriz
+        /// </summary>
+        public Celula Direita
         {
             get { return direita; }
             set { direita = value; }
