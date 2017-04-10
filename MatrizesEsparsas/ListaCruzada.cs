@@ -82,7 +82,6 @@ namespace MatrizesEsparsas
             aux = atual.Abaixo;
             atual.Abaixo = aIncluir;
             aIncluir.Abaixo = aux;
-
         }
     }
 }
