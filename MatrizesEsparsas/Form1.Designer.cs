@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.dgvMatriz = new System.Windows.Forms.DataGridView();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.dlgAbrirArq = new System.Windows.Forms.OpenFileDialog();
             this.btnAbrirArquivo = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.dlgSalvar = new System.Windows.Forms.SaveFileDialog();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.grbOutraMatriz = new System.Windows.Forms.GroupBox();
-            this.btnAbrirDois = new System.Windows.Forms.Button();
-            this.btnSomarMatriz = new System.Windows.Forms.Button();
             this.btnMultiplicarMatriz = new System.Windows.Forms.Button();
+            this.btnSomarMatriz = new System.Windows.Forms.Button();
+            this.btnAbrirDois = new System.Windows.Forms.Button();
             this.btnSomarK = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtK = new System.Windows.Forms.TextBox();
@@ -54,10 +54,10 @@
             this.dgvMatriz.Size = new System.Drawing.Size(485, 417);
             this.dgvMatriz.TabIndex = 0;
             // 
-            // openFileDialog1
+            // dlgAbrirArq
             // 
-            this.openFileDialog1.DefaultExt = "*.txt";
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.dlgAbrirArq.DefaultExt = "*.txt";
+            this.dlgAbrirArq.FileName = "openFileDialog1";
             // 
             // btnAbrirArquivo
             // 
@@ -68,10 +68,11 @@
             this.btnAbrirArquivo.TabIndex = 1;
             this.btnAbrirArquivo.Text = "Abrir Arquivo";
             this.btnAbrirArquivo.UseVisualStyleBackColor = true;
+            this.btnAbrirArquivo.Click += new System.EventHandler(this.btnAbrirArquivo_Click);
             // 
-            // saveFileDialog1
+            // dlgSalvar
             // 
-            this.saveFileDialog1.DefaultExt = "*.txt";
+            this.dlgSalvar.DefaultExt = "*.txt";
             // 
             // btnSalvar
             // 
@@ -97,15 +98,16 @@
             this.grbOutraMatriz.TabStop = false;
             this.grbOutraMatriz.Text = "Outra Matriz";
             // 
-            // btnAbrirDois
+            // btnMultiplicarMatriz
             // 
-            this.btnAbrirDois.Location = new System.Drawing.Point(7, 29);
-            this.btnAbrirDois.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnAbrirDois.Name = "btnAbrirDois";
-            this.btnAbrirDois.Size = new System.Drawing.Size(108, 42);
-            this.btnAbrirDois.TabIndex = 0;
-            this.btnAbrirDois.Text = "Abrir Arquivo 2";
-            this.btnAbrirDois.UseVisualStyleBackColor = true;
+            this.btnMultiplicarMatriz.Enabled = false;
+            this.btnMultiplicarMatriz.Location = new System.Drawing.Point(216, 29);
+            this.btnMultiplicarMatriz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnMultiplicarMatriz.Name = "btnMultiplicarMatriz";
+            this.btnMultiplicarMatriz.Size = new System.Drawing.Size(88, 42);
+            this.btnMultiplicarMatriz.TabIndex = 2;
+            this.btnMultiplicarMatriz.Text = "Multiplicar";
+            this.btnMultiplicarMatriz.UseVisualStyleBackColor = true;
             // 
             // btnSomarMatriz
             // 
@@ -118,16 +120,15 @@
             this.btnSomarMatriz.Text = "Somar";
             this.btnSomarMatriz.UseVisualStyleBackColor = true;
             // 
-            // btnMultiplicarMatriz
+            // btnAbrirDois
             // 
-            this.btnMultiplicarMatriz.Enabled = false;
-            this.btnMultiplicarMatriz.Location = new System.Drawing.Point(216, 29);
-            this.btnMultiplicarMatriz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnMultiplicarMatriz.Name = "btnMultiplicarMatriz";
-            this.btnMultiplicarMatriz.Size = new System.Drawing.Size(88, 42);
-            this.btnMultiplicarMatriz.TabIndex = 2;
-            this.btnMultiplicarMatriz.Text = "Multiplicar";
-            this.btnMultiplicarMatriz.UseVisualStyleBackColor = true;
+            this.btnAbrirDois.Location = new System.Drawing.Point(7, 29);
+            this.btnAbrirDois.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAbrirDois.Name = "btnAbrirDois";
+            this.btnAbrirDois.Size = new System.Drawing.Size(108, 42);
+            this.btnAbrirDois.TabIndex = 0;
+            this.btnAbrirDois.Text = "Abrir Arquivo 2";
+            this.btnAbrirDois.UseVisualStyleBackColor = true;
             // 
             // btnSomarK
             // 
@@ -195,9 +196,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvMatriz;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog dlgAbrirArq;
         private System.Windows.Forms.Button btnAbrirArquivo;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.SaveFileDialog dlgSalvar;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.GroupBox grbOutraMatriz;
         private System.Windows.Forms.Button btnMultiplicarMatriz;

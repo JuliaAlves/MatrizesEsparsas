@@ -11,12 +11,37 @@ namespace MatrizesEsparsas
         int qtasColunas, qtasLinhas;
         Celula cabecaLinha = null, cabecaColuna = null, atual;
 
+        public int QtasColunas
+        {
+            get
+            {
+                return qtasColunas;
+            }
+            set
+            {
+                qtasColunas = value;
+            }
+        }
+
+        public int QtasLinhas
+        {
+            get
+            {
+                return QtasLinhas;
+            }
+            set
+            {
+                QtasLinhas  = value;
+            }
+        }
+
         public ListaCruzada(int colunas, int linhas)
         {
             qtasColunas = colunas;
             qtasLinhas  = linhas;
 
             Celula coluna1 = null;
+            //Coluna 1 será o primeiro nó cabeça
             for (int i=0; i<=qtasColunas; i++)
             {                
                 Celula aux = null;
@@ -36,7 +61,8 @@ namespace MatrizesEsparsas
             cabecaColuna = cabecaColuna.Direita;
 
             Celula linha1 = null;
-            for(int j=0; j<= qtasLinhas; j++)
+            //Linha 1 será o primeiro nó cabeça
+            for (int j=0; j<= qtasLinhas; j++)
             {
                 Celula aux = null;
                 if (cabecaLinha != null)
@@ -55,7 +81,7 @@ namespace MatrizesEsparsas
             cabecaLinha = cabecaLinha.Abaixo;
         }
 
-        public void adicionar(double v, int x, int y)
+        public void Inserir(double v, int x, int y)
         {
             if (x > qtasColunas || y > qtasLinhas)
                 throw new Exception("Número de linhas ou colunas não pode ser maior que tamanho da matriz");
@@ -83,5 +109,6 @@ namespace MatrizesEsparsas
             atual.Abaixo = aIncluir;
             aIncluir.Abaixo = aux;
         }
+        
     }
 }
