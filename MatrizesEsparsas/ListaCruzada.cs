@@ -86,7 +86,7 @@ namespace MatrizesEsparsas
         
         public Celula ValorDe(int col, int row)
         {
-            if (col <= 0 || row <= 0)
+            if (col < 0 || row < 0)
                 throw new Exception("Valor de linha ou coluna não podem ser menores ou iguais a 0");
             if (col > qtasColunas || row > qtasLinhas)
                 throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
@@ -98,18 +98,18 @@ namespace MatrizesEsparsas
 
         public void posicionarEm(int col, int lin)
         {
-            if (col <= 0 || lin <= 0)
+            if (col < 0 || lin < 0)
                 throw new Exception("Valor de linha ou coluna não podem ser menores ou iguais a 0");
             if (col > qtasColunas || lin > qtasLinhas)
                 throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
 
             atual = primeira;
-            for (int i = 1; i < col; i++)
+            for (int i = 0; i < col; i++)
             {
                 atual = atual.Direita;
             }
 
-            for (int j = 1; j < lin; j++)
+            for (int j = 0; j < lin; j++)
             {
                 atual = atual.Abaixo;
             }

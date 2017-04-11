@@ -25,29 +25,32 @@ namespace MatrizesEsparsas
         {
             if (dlgAbrirArq.ShowDialog() == DialogResult.OK)
             {
+                bool ehPrimeira = true;
                 StreamReader fs = new StreamReader(dlgAbrirArq.FileName);
                 string linha = "";
+                int qtdNumeros = 0;
                 while ((linha = fs.ReadLine()) != null)
                 {
                     lista.QtasLinhas = lista.QtasLinhas + 1;
                     string numero = "";
                     for (int i = 0; i < linha.Length; i++)
                     {
-                        if (i + 1 > lista.QtasColunas)
-                            lista.QtasColunas++;
-
                         if (linha[i] != ' ')
                             numero += linha[i];
                         else
                         {
-                            if(Convert.ToDouble(numero) != 0.0)
-                                lista.Inserir(new Celula(Convert.ToDouble(numero), i + 1, lista.QtasLinhas, null, null));
+                            if (ehPrimeira)
+                                lista.QtasColunas++;
+                            if (Convert.ToDouble(numero) != 0.0)
+                                lista.Inserir(new Celula(Convert.ToDouble(numero), lista.QtasLinhas-1, qtdNumeros , null, null));
                             numero = "";
                         }
                     }
+                    ehPrimeira = false;
                 }
                 fs.Close();
-            }
+                Listar();
+            }            
         }
 
         private void Listar()
@@ -56,13 +59,25 @@ namespace MatrizesEsparsas
                 dgvMatriz.Columns.Add(i.ToString(), i.ToString());
 
             string[] linha = new String[lista.QtasColunas];
-            for (int i = 1; i <= lista.QtasLinhas; i++)
+            for (int i = 0; i < lista.QtasLinhas; i++)
             {
-                for (int w = 1; w <= lista.QtasColunas; i++)
-                    linha[i + 1] = lista.ValorDe(w, i).ToString();
+                for (int w = 0; w < lista.QtasColunas; w++)
+                    linha[w] = lista.ValorDe(w, i).ToString();
 
                 dgvMatriz.Rows.Add(linha);
             }
+        }
+
+        private void btnSomarK_Click(object sender, EventArgs e)
+        {
+            lista.somarConstante(Convert.ToInt32(txtK.Text), Convert.ToInt32(txtColuna.Text));
+            Listar();
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            lista.Limpar();
+            Listar();
         }
     }
 }
