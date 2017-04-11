@@ -27,11 +27,11 @@ namespace MatrizesEsparsas
         {
             get
             {
-                return QtasLinhas;
+                return qtasLinhas;
             }
             set
             {
-                QtasLinhas  = value;
+                qtasLinhas  = value;
             }
         }
 
