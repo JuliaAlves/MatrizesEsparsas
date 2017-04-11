@@ -9,7 +9,7 @@ namespace MatrizesEsparsas
     class ListaCruzada
     {
         int qtasColunas, qtasLinhas;
-        Celula cabecaLinha = null, cabecaColuna = null, atual;
+        Celula cabecaLinha = null, cabecaColuna = null, atualLinha, atualColuna;
 
         public int QtasColunas
         {
@@ -91,34 +91,45 @@ namespace MatrizesEsparsas
             Celula aIncluir = new Celula(v, x, y, null, null);
             Celula aux = null;
 
-            atual = cabecaColuna;
+            atualColuna = cabecaColuna;
             for (int i = 1; i < x; i++)
             {
-                atual = atual.Direita;
+                atualColuna = atualColuna.Direita;
             }
-            aux = atual.Direita;
-            atual.Direita = aIncluir;
+            aux = atualColuna.Direita;
+            atualColuna.Direita = aIncluir;
             aIncluir.Direita = aux;
 
-            atual = cabecaLinha;
+            atualLinha = cabecaLinha;
             for(int j = 1; j < y; j++)
             {
-                atual = atual.Abaixo;
+                atualLinha = atualLinha.Abaixo;
             }
-            aux = atual.Abaixo;
-            atual.Abaixo = aIncluir;
+            aux = atualLinha.Abaixo;
+            atualLinha.Abaixo = aIncluir;
             aIncluir.Abaixo = aux;
         }
         
         public double ValorDe(int col, int row)
         {
-            atual = cabecaColuna;
-            for(int i=0; i<col; i++)
-            {
+            if (col <= 0 || row <= 0)
+                throw new Exception("Valor de linha ou coluna não podem ser menores ou iguais a 0");
+            if (col > qtasColunas || row > qtasLinhas)
+                throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
 
+            atualColuna = cabecaColuna;
+            for(int i=1; i<col; i++)
+            {
+                atualColuna = atualColuna.Direita;
             }
 
-            return atual.Valor;
+            atualLinha = atualColuna;
+            for(int j=0; j<row; j++)
+            {
+                atualLinha = atualLinha.Abaixo;
+            }
+
+            return atualLinha.Valor;
         }
     }
 }
