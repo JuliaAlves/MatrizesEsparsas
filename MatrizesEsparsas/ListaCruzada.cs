@@ -85,14 +85,14 @@ namespace MatrizesEsparsas
         {
             if (x > qtasColunas || y > qtasLinhas)
                 throw new Exception("Número de linhas ou colunas não pode ser maior que tamanho da matriz");
-            if (x < 0 || y < 0)
-                throw new Exception("Número de linhas ou colunas não pode ser menor que 0");
+            if (x <= 0 || y <= 0)
+                throw new Exception("Número de linhas ou colunas não pode ser menor ou iguais que 0");
 
             Celula aIncluir = new Celula(v, x, y, null, null);
             Celula aux = null;
 
             atual = cabecaColuna;
-            for (int i = 0; i < x; i++)
+            for (int i = 1; i < x; i++)
             {
                 atual = atual.Direita;
             }
@@ -101,7 +101,7 @@ namespace MatrizesEsparsas
             aIncluir.Direita = aux;
 
             atual = cabecaLinha;
-            for(int j = 0; j < y; j++)
+            for(int j = 1; j < y; j++)
             {
                 atual = atual.Abaixo;
             }
@@ -110,10 +110,15 @@ namespace MatrizesEsparsas
             aIncluir.Abaixo = aux;
         }
         
-        //public double ValorDe(int col, int row)
-        //{
-        //    atual = cabecaColuna;
+        public double ValorDe(int col, int row)
+        {
+            atual = cabecaColuna;
+            for(int i=0; i<col; i++)
+            {
 
-        //}
+            }
+
+            return atual.Valor;
+        }
     }
 }
