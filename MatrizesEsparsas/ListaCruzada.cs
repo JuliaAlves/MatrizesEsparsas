@@ -75,7 +75,7 @@ namespace MatrizesEsparsas
                 else
                 {
                     linha1 = cabecaLinha = new Celula(0.0, j, 0, null, null);
-                }                    
+                }
             }
             cabecaLinha.Abaixo = linha1;
             cabecaLinha = cabecaLinha.Abaixo;

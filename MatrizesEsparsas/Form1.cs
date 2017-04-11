@@ -30,12 +30,22 @@ namespace MatrizesEsparsas
                 while((linha = fs.ReadLine()) != null)
                 {
                     lista.QtasLinhas = lista.QtasLinhas + 1;
+                    string numero = "";
                     for(int i=0; i<linha.Length; i++)
                     {
-                        if (i > lista.QtasColunas)
+                        if (i+1> lista.QtasColunas)
                             lista.QtasColunas++;
+
+                        if (linha[i] != ' ')                        
+                            numero += linha[i];
+                        else
+                        {
+                            lista.Inserir(Convert.ToDouble(numero), i + 1, lista.QtasLinhas);
+                            numero = "";
+                        }                            
                     }
                 }
+                fs.Close();
             }
         }
     }
