@@ -40,7 +40,7 @@ namespace MatrizesEsparsas
             qtasColunas = colunas;
             qtasLinhas  = linhas;
 
-            Celula coluna1 = null;
+            Celula coluna1 = new Celula(0.0, 0, 0, null, null); 
             //Coluna 1 será o primeiro nó cabeça
             for (int i=0; i<=qtasColunas; i++)
             {                
@@ -52,15 +52,11 @@ namespace MatrizesEsparsas
                     cabecaColuna = new Celula(0.0, 0, i, null, null);
                     aux.Direita = cabecaColuna;
                 }
-                else
-                {
-                    coluna1 = cabecaColuna = new Celula(0.0, 0, i, null, null);
-                }                
             }
             cabecaColuna.Direita = coluna1;
             cabecaColuna = cabecaColuna.Direita;
 
-            Celula linha1 = null;
+            Celula linha1 = new Celula(0.0, 0, 0, null, null);
             //Linha 1 será o primeiro nó cabeça
             for (int j=0; j<= qtasLinhas; j++)
             {
@@ -71,10 +67,6 @@ namespace MatrizesEsparsas
                     cabecaLinha = cabecaLinha.Abaixo;
                     cabecaLinha = new Celula(0.0, j, 0, null, null);
                     aux.Abaixo = cabecaLinha;
-                }
-                else
-                {
-                    linha1 = cabecaLinha = new Celula(0.0, j, 0, null, null);
                 }
             }
             cabecaLinha.Abaixo = linha1;
