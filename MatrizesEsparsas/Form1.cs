@@ -40,7 +40,8 @@ namespace MatrizesEsparsas
                             numero += linha[i];
                         else
                         {
-                            lista.Inserir(Convert.ToDouble(numero), i + 1, lista.QtasLinhas);
+                            if(Convert.ToDouble(numero) != 0.0)
+                                lista.Inserir(new Celula(Convert.ToDouble(numero), i + 1, lista.QtasLinhas, null, null));
                             numero = "";
                         }
                     }
