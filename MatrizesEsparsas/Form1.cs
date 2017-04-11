@@ -18,7 +18,6 @@ namespace MatrizesEsparsas
         public frmMatrizEsparsa()
         {
             InitializeComponent();
-            lista = new ListaCruzada(0, 0);
         }
 
         private void btnAbrirArquivo_Click(object sender, EventArgs e)
@@ -27,26 +26,14 @@ namespace MatrizesEsparsas
             {
                 bool ehPrimeira = true;
                 StreamReader fs = new StreamReader(dlgAbrirArq.FileName);
-                string linha = "";
-                int qtdNumeros = 0;
+                string linha = fs.ReadLine();
+                string[] partes = linha.Split(' ');
+                lista = new ListaCruzada(Convert.ToInt32(partes[0]), Convert.ToInt32(partes[1]));
                 while ((linha = fs.ReadLine()) != null)
                 {
-                    lista.QtasLinhas = lista.QtasLinhas + 1;
-                    string numero = "";
-                    for (int i = 0; i < linha.Length; i++)
-                    {
-                        if (linha[i] != ' ')
-                            numero += linha[i];
-                        else
-                        {
-                            if (ehPrimeira)
-                                lista.QtasColunas++;
-                            if (Convert.ToDouble(numero) != 0.0)
-                                lista.Inserir(new Celula(Convert.ToDouble(numero), lista.QtasLinhas-1, qtdNumeros , null, null));
-                            numero = "";
-                        }
-                    }
-                    ehPrimeira = false;
+                    partes = linha.Split(' ');
+                    lista.Inserir(new Celula(Convert.ToDouble(partes[2]), Convert.ToInt32(partes[1]), 
+                                  Convert.ToInt32(partes[0]), null, null));
                 }
                 fs.Close();
                 Listar();
@@ -55,10 +42,10 @@ namespace MatrizesEsparsas
 
         private void Listar()
         {
-            for (int i = 1; i <= lista.QtasColunas; i++)
+            for (int i = 0; i < lista.QtasColunas; i++)
                 dgvMatriz.Columns.Add(i.ToString(), i.ToString());
 
-            string[] linha = new String[lista.QtasColunas];
+            string[] linha = new string[lista.QtasColunas];
             for (int i = 0; i < lista.QtasLinhas; i++)
             {
                 for (int w = 0; w < lista.QtasColunas; w++)

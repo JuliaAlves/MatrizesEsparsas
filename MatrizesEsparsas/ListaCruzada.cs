@@ -9,7 +9,7 @@ namespace MatrizesEsparsas
     class ListaCruzada
     {
         int qtasColunas, qtasLinhas;
-        Celula primeira, atual;
+        Celula primeira, atualLinha, atualColuna;
 
         public int QtasColunas
         {
@@ -73,57 +73,88 @@ namespace MatrizesEsparsas
             
             Celula aux = null;
 
-            posicionarEm(aIncluir.Coluna, aIncluir.Linha);
+            posicionarEmColuna(aIncluir.Coluna);
+            posicionarEmLinha(aIncluir.Linha);
 
-            aux = atual.Abaixo;
-            atual.Abaixo = aIncluir;
+            while(atualColuna.Abaixo.Linha< atualLinha.Linha && atualColuna.Abaixo.Linha!=-1)
+                atualColuna = atualColuna.Abaixo;
+
+            aux=atualColuna.Abaixo;
+            atualColuna.Abaixo = aIncluir;
             aIncluir.Abaixo = aux;
 
-            aux = atual.Direita;
-            atual.Direita = aIncluir;
+            while (atualLinha.Direita.Coluna < atualColuna.Coluna && atualLinha.Direita.Coluna != -1)
+                atualLinha = atualLinha.Direita;
+
+            aux = atualLinha.Direita;
+            atualLinha.Direita = aIncluir;
             aIncluir.Direita = aux;
+
         }
         
-        public Celula ValorDe(int col, int row)
+        public double ValorDe(int col, int row)
         {
             if (col < 0 || row < 0)
                 throw new Exception("Valor de linha ou coluna não podem ser menores ou iguais a 0");
             if (col > qtasColunas || row > qtasLinhas)
                 throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
 
-            posicionarEm(col, row);
+            posicionarEmColuna(col);
 
-            return atual;
+            while (atualColuna.Linha < row && atualColuna.Abaixo.Linha != -1)
+                atualColuna = atualColuna.Abaixo;
+
+            if (atualColuna.Linha==row&&atualColuna.Coluna==col)            
+                return atualColuna.Valor;
+
+            return 0;
         }
 
-        public void posicionarEm(int col, int lin)
+        public void posicionarEmColuna(int col)
         {
-            if (col < 0 || lin < 0)
-                throw new Exception("Valor de linha ou coluna não podem ser menores ou iguais a 0");
-            if (col > qtasColunas || lin > qtasLinhas)
+            if (col < -1 )
+                throw new Exception("Valor de linha ou coluna não podem ser menores ou iguais a -1");
+            if (col > qtasColunas )
                 throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
 
-            atual = primeira;
+            atualColuna = primeira;
             for (int i = 0; i < col; i++)
             {
-                atual = atual.Direita;
-            }
-
-            for (int j = 0; j < lin; j++)
-            {
-                atual = atual.Abaixo;
+                atualColuna = atualColuna.Direita;
             }
         }
-        
+
+        public void posicionarEmLinha(int lin)
+        {
+            if (lin < -1)
+                throw new Exception("Valor de linha não pode ser menor que -1");
+            if (lin > qtasColunas)
+                throw new Exception("linha não pode ser maior que a matriz");
+
+            atualLinha = primeira;
+            for (int j = 0; j < lin; j++)
+            {
+                atualLinha = atualLinha.Abaixo;
+            }
+        }
 
         public void Limpar()
         {
-            for(int i = 0; i<qtasLinhas; i++)            
-                for(int j=0; j<qtasColunas; j++)
-                {
-                    posicionarEm(i, j);
-                    atual = null;
-                }
+            posicionarEmColuna(0);
+            posicionarEmLinha(0);
+
+            while (atualColuna.Direita.Coluna != -1)
+            {
+                atualColuna.Abaixo = atualColuna;
+                atualColuna = atualColuna.Direita;
+            }
+
+            while (atualLinha.Abaixo.Linha != -1)
+            {
+                atualLinha.Direita = atualLinha;
+                atualLinha = atualLinha.Abaixo;
+            }
+
         }
 
         public void Remover(Celula aRemover)
@@ -131,9 +162,18 @@ namespace MatrizesEsparsas
             if(aRemover == null)            
                 throw new Exception("nulo");
 
-            posicionarEm(aRemover.Coluna-1, aRemover.Linha-1);
-            atual.Direita = atual.Direita.Direita;
-            atual.Abaixo  = atual.Abaixo.Abaixo;
+            posicionarEmLinha(aRemover.Linha);
+            posicionarEmColuna(aRemover.Coluna);
+
+
+            while (atualColuna.Abaixo.Linha < atualLinha.Linha && atualColuna.Abaixo.Linha != -1)
+                atualColuna = atualColuna.Abaixo;
+
+            while (atualLinha.Direita.Coluna < atualColuna.Coluna && atualLinha.Direita.Coluna != -1)
+                atualLinha = atualLinha.Direita;
+
+            atualColuna.Abaixo = aRemover.Abaixo;
+            atualLinha.Direita = aRemover.Direita;
         }
 
         public void somarConstante(int k, int col)
@@ -141,10 +181,11 @@ namespace MatrizesEsparsas
             if (col < 0 || col > qtasColunas)
                 throw new Exception("coluna inválida");
             
-            posicionarEm(col, -1);
-            while (atual.Abaixo != atual)
+            posicionarEmColuna(col);
+            while (atualColuna.Abaixo.Linha != -1)
             {
-                atual.Abaixo.Valor += k;
+                atualColuna.Abaixo.Valor += k;
+                atualColuna = atualColuna.Abaixo;
             }
         }
     }
