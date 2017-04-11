@@ -110,5 +110,10 @@ namespace MatrizesEsparsas
             aIncluir.Abaixo = aux;
         }
         
+        //public double ValorDe(int col, int row)
+        //{
+        //    atual = cabecaColuna;
+
+        //}
     }
 }

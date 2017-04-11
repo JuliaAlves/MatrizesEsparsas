@@ -46,7 +46,13 @@ namespace MatrizesEsparsas
                     }
                 }
                 fs.Close();
+
+                for(int i=1; i<=lista.QtasColunas; i++)
+                    dgvMatriz.Columns.Add(i.ToString(), i.ToString());
+                for (int i = 1; i <= lista.QtasLinhas; i++)
+                    dgvMatriz.Rows.Add();
             }
         }
+                
     }
 }
