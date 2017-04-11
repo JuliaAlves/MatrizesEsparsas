@@ -27,11 +27,11 @@ namespace MatrizesEsparsas
         {
             get
             {
-                return QtasLinhas;
+                return qtasLinhas;
             }
             set
             {
-                QtasLinhas  = value;
+                qtasLinhas  = value;
             }
         }
 
@@ -92,13 +92,13 @@ namespace MatrizesEsparsas
             Celula aux = null;
 
             atualColuna = cabecaColuna;
-            for (int i = 1; i <= x; i++)
+            for (int i = 1; i < x; i++)
             {
                 atualColuna = atualColuna.Direita;
             }            
 
             atualLinha = atualColuna;
-            for(int j = 1; j <= y; j++)
+            for(int j = 1; j < y; j++)
             {
                 atualLinha = atualLinha.Abaixo;
             }
@@ -119,13 +119,13 @@ namespace MatrizesEsparsas
                 throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
 
             atualColuna = cabecaColuna;
-            for(int i=1; i<=col; i++)
+            for(int i=1; i<col; i++)
             {
                 atualColuna = atualColuna.Direita;
             }
 
             atualLinha = atualColuna;
-            for(int j=0; j<=row; j++)
+            for(int j=0; j<row; j++)
             {
                 atualLinha = atualLinha.Abaixo;
             }
