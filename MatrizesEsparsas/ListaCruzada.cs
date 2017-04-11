@@ -92,22 +92,23 @@ namespace MatrizesEsparsas
             Celula aux = null;
 
             atualColuna = cabecaColuna;
-            for (int i = 1; i < x; i++)
+            for (int i = 1; i <= x; i++)
             {
                 atualColuna = atualColuna.Direita;
-            }
-            aux = atualColuna.Direita;
-            atualColuna.Direita = aIncluir;
-            aIncluir.Direita = aux;
+            }            
 
-            atualLinha = cabecaLinha;
-            for(int j = 1; j < y; j++)
+            atualLinha = atualColuna;
+            for(int j = 1; j <= y; j++)
             {
                 atualLinha = atualLinha.Abaixo;
             }
             aux = atualLinha.Abaixo;
             atualLinha.Abaixo = aIncluir;
             aIncluir.Abaixo = aux;
+
+            aux = atualColuna.Direita;
+            atualColuna.Direita = aIncluir;
+            aIncluir.Direita = aux;
         }
         
         public double ValorDe(int col, int row)
@@ -118,13 +119,13 @@ namespace MatrizesEsparsas
                 throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
 
             atualColuna = cabecaColuna;
-            for(int i=1; i<col; i++)
+            for(int i=1; i<=col; i++)
             {
                 atualColuna = atualColuna.Direita;
             }
 
             atualLinha = atualColuna;
-            for(int j=0; j<row; j++)
+            for(int j=0; j<=row; j++)
             {
                 atualLinha = atualLinha.Abaixo;
             }
