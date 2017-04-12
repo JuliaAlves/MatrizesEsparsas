@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MatrizesEsparsas
 {
-    class ListaCruzada
+    public class ListaCruzada
     {
         int qtasColunas, qtasLinhas;
         Celula primeira, atualLinha, atualColuna;
@@ -118,10 +118,9 @@ namespace MatrizesEsparsas
                 throw new Exception("Valor de linha ou coluna não podem ser  maiores que a Matriz");
 
             atualColuna = primeira;
-            for (int i = 0; i < col; i++)
-            {
+            while (atualColuna.Coluna < col && atualColuna.Direita.Coluna != -1)
                 atualColuna = atualColuna.Direita;
-            }
+            
         }
 
         public void posicionarEmLinha(int lin)
@@ -132,10 +131,9 @@ namespace MatrizesEsparsas
                 throw new Exception("linha não pode ser maior que a matriz");
 
             atualLinha = primeira;
-            for (int j = 0; j < lin; j++)
-            {
+            while(atualLinha.Linha < lin  && atualLinha.Abaixo.Linha != -1)            
                 atualLinha = atualLinha.Abaixo;
-            }
+            
         }
 
         public void Limpar()
@@ -143,13 +141,13 @@ namespace MatrizesEsparsas
             posicionarEmColuna(0);
             posicionarEmLinha(0);
 
-            while (atualColuna.Direita.Coluna != -1)
+            while (atualColuna.Coluna != -1)
             {
                 atualColuna.Abaixo = atualColuna;
                 atualColuna = atualColuna.Direita;
             }
 
-            while (atualLinha.Abaixo.Linha != -1)
+            while (atualLinha.Linha != -1)
             {
                 atualLinha.Direita = atualLinha;
                 atualLinha = atualLinha.Abaixo;
@@ -182,11 +180,67 @@ namespace MatrizesEsparsas
                 throw new Exception("coluna inválida");
             
             posicionarEmColuna(col);
-            while (atualColuna.Abaixo.Linha != -1)
+            posicionarEmLinha(0);
+            for(int i=0; i<QtasLinhas; i++)
             {
-                atualColuna.Abaixo.Valor += k;
+                if (ValorDe(col, i) == 0)
+                    Inserir(new Celula(k, i, col, null, null));
+                else
+                    atualColuna.Valor += k;
+                atualLinha = atualLinha.Abaixo;
                 atualColuna = atualColuna.Abaixo;
             }
+        }
+
+        public ListaCruzada somar(ListaCruzada lista)
+        {
+            if (lista == null)
+                throw new NullReferenceException("lista a ser somada está nula");
+
+            int maiorColuna, maiorLinha = 0;
+            if (this.qtasColunas.CompareTo(lista.qtasColunas) > 0)
+                maiorColuna = this.qtasColunas;
+            else
+                maiorColuna = lista.qtasColunas;
+            if (this.qtasLinhas.CompareTo(lista.QtasLinhas) > 0)
+                maiorLinha = this.qtasLinhas;
+            else
+                maiorLinha = lista.qtasLinhas;
+
+            ListaCruzada ret = new ListaCruzada(maiorColuna, maiorLinha);
+
+            posicionarEmColuna(0);
+            posicionarEmLinha(0);
+            lista.posicionarEmLinha(0);
+            lista.posicionarEmColuna(0);            
+
+            while(atualLinha.Linha != -1 && lista.atualLinha.Linha != -1)
+            {
+                while (atualColuna.Coluna != -1 && lista.atualColuna.Coluna != -1)
+                {
+                    if (atualLinha.Linha == lista.atualLinha.Linha)
+                    {
+                        if (atualColuna.Coluna == lista.atualColuna.Coluna)
+                            ret.Inserir(new Celula(atualColuna.Valor + lista.atualColuna.Valor,
+                                                   atualLinha.Linha, atualColuna.Coluna, null, null));
+                        else
+                        {
+                            if (atualColuna != null)
+                                ret.Inserir(new Celula(atualColuna.Valor,
+                                               atualLinha.Linha, atualColuna.Coluna, null, null));
+                            else
+                                if(lista.atualColuna != null)
+                                    ret.Inserir(new Celula(lista.atualColuna.Valor,
+                                           atualLinha.Linha, atualColuna.Coluna, null, null));
+                        }
+                    }                                            
+                    atualColuna = atualColuna.Direita;
+                    lista.atualColuna = lista.atualColuna.Direita;
+                }
+                atualLinha = atualLinha.Abaixo;
+                lista.atualLinha = lista.atualLinha.Abaixo;
+            }
+            return ret;
         }
     }
 }

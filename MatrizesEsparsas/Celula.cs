@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MatrizesEsparsas
 {
-    class Celula : IComparable<Celula>
+    public class Celula : IComparable<Celula>
     {
         private Celula direita;
         private Celula abaixo;
