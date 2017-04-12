@@ -80,16 +80,9 @@ namespace MatrizesEsparsas
             lerArquivo(dataGridView1,ref matriz2);
         }
 
-        private void dgvMatriz_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void btnMultiplicarMatriz_Click(object sender, EventArgs e)
         {
-            if (matriz1.ValorDe(e.ColumnIndex, e.RowIndex) == 0)
-                matriz1.Inserir(new Celula(Convert.ToDouble(dgvMatriz.Rows[e.RowIndex].Cells[e.ColumnIndex].Value),
-                                e.RowIndex, e.ColumnIndex, null, null));
-            else
-            {
-                matriz1.Remover();
-            }
-            
+            Listar(dataGridView2, matriz1.multiplicar(matriz2));
         }
 
         private void btnSomarMatriz_Click(object sender, EventArgs e)
