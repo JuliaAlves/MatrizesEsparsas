@@ -11,6 +11,9 @@ namespace MatrizesEsparsas
         int qtasColunas, qtasLinhas;
         Celula primeira, atualLinha, atualColuna;
 
+        /// <summary>
+        /// Número de colunas da matriz
+        /// </summary>
         public int QtasColunas
         {
             get
@@ -22,7 +25,9 @@ namespace MatrizesEsparsas
                 qtasColunas = value;
             }
         }
-
+        /// <summary>
+        /// Números de linhas da matriz
+        /// </summary>
         public int QtasLinhas
         {
             get
@@ -34,7 +39,11 @@ namespace MatrizesEsparsas
                 qtasLinhas  = value;
             }
         }
-
+        /// <summary>
+        /// Construtos
+        /// </summary>
+        /// <param name="colunas">Número de colunas</param>
+        /// <param name="linhas">Número de linhas</param>
         public ListaCruzada(int colunas, int linhas)
         {
             if (colunas < 0 || linhas < 0)
@@ -68,6 +77,9 @@ namespace MatrizesEsparsas
 
         public void Inserir(Celula aIncluir)
         {
+            if (aIncluir.Valor == 0)
+                return;
+
             if (aIncluir == null)
                 throw new Exception("parametro nulo");
             
@@ -269,12 +281,7 @@ namespace MatrizesEsparsas
             if (qtasColunas != outra.qtasLinhas || outra==null)
                 throw new Exception("Não pode ocorrer multiplicação");
 
-            ListaCruzada ret = new ListaCruzada(qtasLinhas, outra.qtasColunas);
-            posicionarEmColuna(0);
-            posicionarEmLinha(0);
-
-            outra.posicionarEmLinha(0);
-            outra.posicionarEmColuna(0);
+            ListaCruzada ret = new ListaCruzada(outra.qtasColunas,qtasLinhas);
 
             for (int lin = 0; lin < qtasLinhas; lin++)
             {

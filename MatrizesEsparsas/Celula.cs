@@ -13,7 +13,15 @@ namespace MatrizesEsparsas
         private int linha, coluna;
         private double valor;
 
-        
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="v">valor</param>
+        /// <param name="l">linha</param>
+        /// <param name="c">coluna</param>
+        /// <param name="dir">Ponteiro para a celula a direita</param>
+        /// <param name="abx">Ponteiro para a celula abaixo</param>
         public Celula(double v, int l, int c, Celula dir,Celula abx)
         {
             this.Abaixo = abx;
