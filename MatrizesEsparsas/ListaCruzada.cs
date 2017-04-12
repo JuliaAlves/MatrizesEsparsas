@@ -166,6 +166,19 @@ namespace MatrizesEsparsas
 
         }
 
+        public void RemoverDePosicao(int coluna, int linha)
+        {
+            if (coluna < 0 || linha < 0 || coluna > qtasColunas || linha > qtasLinhas)
+                throw new Exception("Parametro de remocao invalido");
+
+            posicionarEmColuna(coluna);
+
+            while(atualColuna.Linha < linha)            
+                atualColuna = atualColuna.Abaixo;
+            
+            Remover(atualColuna);
+        }
+
         public void Remover(Celula aRemover)
         {
             if(aRemover == null)            

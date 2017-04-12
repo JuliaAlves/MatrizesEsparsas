@@ -85,6 +85,13 @@ namespace MatrizesEsparsas
             Listar(dataGridView2, matriz1.multiplicar(matriz2));
         }
 
+        private void dgvMatriz_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (matriz1.ValorDe(e.ColumnIndex, e.RowIndex) == 0)
+                matriz1.Inserir(new Celula(Convert.ToDouble(dgvMatriz.Rows[e.RowIndex].Cells[e.ColumnIndex].Value), e.RowIndex, e.ColumnIndex, null, null));
+
+        }
+
         private void btnSomarMatriz_Click(object sender, EventArgs e)
         {
             Listar(dataGridView2, matriz1.somar(matriz2));
