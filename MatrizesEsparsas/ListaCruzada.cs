@@ -197,24 +197,64 @@ namespace MatrizesEsparsas
             if (lista == null)
                 throw new NullReferenceException("lista a ser somada está nula");
 
+            ListaCruzada MaiorColuna, MaiorLinha;
+            ListaCruzada MenorColuna, MenorLinha;
             int maiorColuna, maiorLinha = 0;
             if (this.qtasColunas.CompareTo(lista.qtasColunas) > 0)
+            {
                 maiorColuna = this.qtasColunas;
+                MaiorColuna = this;
+                MenorColuna = lista;
+            }
             else
+            {
                 maiorColuna = lista.qtasColunas;
+                MaiorColuna = lista;
+                MenorColuna = this;
+            }                
             if (this.qtasLinhas.CompareTo(lista.QtasLinhas) > 0)
+            {
                 maiorLinha = this.qtasLinhas;
+                MaiorLinha = this;
+                MenorLinha = lista;
+            }                
             else
+            {
                 maiorLinha = lista.qtasLinhas;
+                MaiorLinha = lista;
+                MenorLinha = this;
+            }                
 
             ListaCruzada ret = new ListaCruzada(maiorColuna, maiorLinha);
 
-            posicionarEmColuna(0);
-            posicionarEmLinha(0);
-            lista.posicionarEmLinha(0);
-            lista.posicionarEmColuna(0);            
+            int colunas, linhas = 0;
+            colunas = MenorColuna.qtasColunas;
+            linhas = MenorLinha.qtasLinhas;
 
-            while(atualLinha.Linha != -1 && lista.atualLinha.Linha != -1)
+            posicionarEmColuna(0);
+            atualColuna = atualColuna.Abaixo;
+            posicionarEmLinha(0);
+            atualLinha = atualLinha.Direita;
+
+            lista.posicionarEmLinha(0);
+            lista.atualColuna = lista.atualColuna.Direita;
+            lista.posicionarEmColuna(0);
+            lista.atualLinha = lista.atualLinha.Abaixo;
+
+            ret.posicionarEmLinha(0);
+            ret.atualColuna = lista.atualColuna.Direita;
+            ret.posicionarEmColuna(0);
+            ret.atualLinha = lista.atualLinha.Abaixo;
+
+            for (int i=0; i<colunas; i++)
+            {                
+                for(int j=0; j<linhas; j++)
+                {
+                    ret.Inserir(new Celula(ValorDe(i, j) + lista.ValorDe(i, j), j, i, null, null));
+                }
+            }
+            /*
+            while (atualLinha.Linha != -1 && lista.atualLinha.Linha != -1)
             {
                 while (atualColuna.Coluna != -1 && lista.atualColuna.Coluna != -1)
                 {
@@ -239,7 +279,7 @@ namespace MatrizesEsparsas
                 }
                 atualLinha = atualLinha.Abaixo;
                 lista.atualLinha = lista.atualLinha.Abaixo;
-            }
+            }*/
             return ret;
         }
     }
