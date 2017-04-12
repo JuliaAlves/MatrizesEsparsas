@@ -249,37 +249,44 @@ namespace MatrizesEsparsas
             for (int i=0; i<colunas; i++)
             {                
                 for(int j=0; j<linhas; j++)
-                {
                     ret.Inserir(new Celula(ValorDe(i, j) + lista.ValorDe(i, j), j, i, null, null));
+                for (int k = linhas; k < maiorLinha; k++)
+                    ret.Inserir(new Celula(MaiorLinha.ValorDe(i,k),k,i,null,null));
+            }
+
+            for(int w=colunas; w<maiorColuna; w++)
+            {
+                for (int j = 0; j < linhas; j++)
+                    ret.Inserir(new Celula(ValorDe(w, j) + lista.ValorDe(w, j), j, w, null, null));
+                for (int k = linhas; k < maiorLinha; k++)
+                    ret.Inserir(new Celula(MaiorLinha.ValorDe(w, k), k, w, null, null));
+            }
+            return ret;
+        }
+
+        public ListaCruzada multiplicar(ListaCruzada outra)
+        {
+            if (qtasColunas != outra.qtasLinhas || outra==null)
+                throw new Exception("Não pode ocorrer multiplicação");
+
+            ListaCruzada ret = new ListaCruzada(qtasLinhas, outra.qtasColunas);
+            posicionarEmColuna(0);
+            posicionarEmLinha(0);
+
+            outra.posicionarEmLinha(0);
+            outra.posicionarEmColuna(0);
+
+            for (int lin = 0; lin < qtasLinhas; lin++)
+            {
+                for (int col = 0; col < outra.qtasColunas; col++)
+                {
+                    double valor = 0.0;
+                    for (int i = 0; i < qtasColunas; i++)
+                        valor += ValorDe(i, lin) * outra.ValorDe(col, i);
+
+                    ret.Inserir(new Celula(valor, lin, col, null, null));
                 }
             }
-            /*
-            while (atualLinha.Linha != -1 && lista.atualLinha.Linha != -1)
-            {
-                while (atualColuna.Coluna != -1 && lista.atualColuna.Coluna != -1)
-                {
-                    if (atualLinha.Linha == lista.atualLinha.Linha)
-                    {
-                        if (atualColuna.Coluna == lista.atualColuna.Coluna)
-                            ret.Inserir(new Celula(atualColuna.Valor + lista.atualColuna.Valor,
-                                                   atualLinha.Linha, atualColuna.Coluna, null, null));
-                        else
-                        {
-                            if (atualColuna != null)
-                                ret.Inserir(new Celula(atualColuna.Valor,
-                                               atualLinha.Linha, atualColuna.Coluna, null, null));
-                            else
-                                if(lista.atualColuna != null)
-                                    ret.Inserir(new Celula(lista.atualColuna.Valor,
-                                           atualLinha.Linha, atualColuna.Coluna, null, null));
-                        }
-                    }                                            
-                    atualColuna = atualColuna.Direita;
-                    lista.atualColuna = lista.atualColuna.Direita;
-                }
-                atualLinha = atualLinha.Abaixo;
-                lista.atualLinha = lista.atualLinha.Abaixo;
-            }*/
             return ret;
         }
     }

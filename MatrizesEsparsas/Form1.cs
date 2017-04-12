@@ -80,6 +80,11 @@ namespace MatrizesEsparsas
             lerArquivo(dataGridView1,ref matriz2);
         }
 
+        private void btnMultiplicarMatriz_Click(object sender, EventArgs e)
+        {
+            Listar(dataGridView2, matriz1.multiplicar(matriz2));
+        }
+
         private void btnSomarMatriz_Click(object sender, EventArgs e)
         {
             Listar(dataGridView2, matriz1.somar(matriz2));
