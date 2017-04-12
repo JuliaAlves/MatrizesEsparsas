@@ -100,13 +100,18 @@ namespace MatrizesEsparsas
             aIncluir.Abaixo = aux;
 
             while (atualLinha.Direita.Coluna < atualColuna.Coluna && atualLinha.Direita.Coluna != -1)
-                atualLinha = atualLinha.Direita;
+                atualLinha = atualLinha.Direita; //coloca na linha certa
 
             aux = atualLinha.Direita;
             atualLinha.Direita = aIncluir;
             aIncluir.Direita = aux;
         }
-        
+        /// <summary>
+        /// Verifica o valor da célula de dada posição
+        /// </summary>
+        /// <param name="col">Coluna onde será buscado o valor </param>
+        /// <param name="row">Linha onde será buscado o valor</param>
+        /// <returns></returns>
         public double ValorDe(int col, int row)
         {
             if (col < 0 || row < 0)
@@ -117,14 +122,17 @@ namespace MatrizesEsparsas
             posicionarEmColuna(col);
 
             while (atualColuna.Linha < row && atualColuna.Abaixo.Linha != -1)
-                atualColuna = atualColuna.Abaixo;
+                atualColuna = atualColuna.Abaixo;//coloca na linha certa 
 
             if (atualColuna.Linha==row&&atualColuna.Coluna==col)            
                 return atualColuna.Valor;
 
             return 0;
         }
-
+        /// <summary>
+        /// Reposiciona o atualColuna
+        /// </summary>
+        /// <param name="col">Coluna onde será posicionada o atualColuna</param>
         public void posicionarEmColuna(int col)
         {
             if (col < -1 )
@@ -137,7 +145,10 @@ namespace MatrizesEsparsas
                 atualColuna = atualColuna.Direita;
             
         }
-
+        /// <summary>
+        /// Reposiciona o atualLinha
+        /// </summary>
+        /// <param name="lin">Linha onde será posicionada o atualLinha</param>
         public void posicionarEmLinha(int lin)
         {
             if (lin < -1)
@@ -151,25 +162,33 @@ namespace MatrizesEsparsas
             
         }
 
+        /// <summary>
+        /// Limpa a matriz, deixando somente a estrutura
+        /// </summary>
         public void Limpar()
         {
             posicionarEmColuna(0);
             posicionarEmLinha(0);
 
-            while (atualColuna.Coluna != -1)
+            while (atualColuna.Coluna != -1) 
             {
                 atualColuna.Abaixo = atualColuna;
                 atualColuna = atualColuna.Direita;
-            }
+            }//até a celula -1 se apontar
 
             while (atualLinha.Linha != -1)
             {
                 atualLinha.Direita = atualLinha;
                 atualLinha = atualLinha.Abaixo;
-            }
+            }//até a celula -1 se apontar
 
         }
 
+        /// <summary>
+        /// Remove a célula de uma dada posição
+        /// </summary>
+        /// <param name="coluna">Coluna onde vai se remover a celula</param>
+        /// <param name="linha">Linha onde vai se remover a celula</param>
         public void RemoverDePosicao(int coluna, int linha)
         {
             if (coluna < 0 || linha < 0 || coluna > qtasColunas || linha > qtasLinhas)
@@ -186,6 +205,10 @@ namespace MatrizesEsparsas
                 throw new Exception("Posição inválida");
         }
 
+        /// <summary>
+        /// Remove uma determinada célula da matriz
+        /// </summary>
+        /// <param name="aRemover">Célula a ser removida</param>
         public void Remover(Celula aRemover)
         {
             if(aRemover == null)            
@@ -196,15 +219,20 @@ namespace MatrizesEsparsas
 
 
             while (atualColuna.Abaixo.Linha < atualLinha.Linha && atualColuna.Abaixo.Linha != -1)
-                atualColuna = atualColuna.Abaixo;
+                atualColuna = atualColuna.Abaixo;//coloca na coluna certa
 
             while (atualLinha.Direita.Coluna < atualColuna.Coluna && atualLinha.Direita.Coluna != -1)
-                atualLinha = atualLinha.Direita;
+                atualLinha = atualLinha.Direita;//coloca na linha certa
 
             atualColuna.Abaixo = aRemover.Abaixo;
             atualLinha.Direita = aRemover.Direita;
         }
 
+        /// <summary>
+        /// Soma um número a todas as linhas de uma certa coluna
+        /// </summary>
+        /// <param name="k">Número a ser somado</param>
+        /// <param name="col">Coluna onde será somado</param>
         public void somarConstante(int k, int col)
         {
             if (col < 0 || col > qtasColunas)
@@ -222,7 +250,11 @@ namespace MatrizesEsparsas
                 atualColuna = atualColuna.Abaixo;
             }
         }
-
+        /// <summary>
+        /// Soma duas matrizes
+        /// </summary>
+        /// <param name="lista">Lista a ser somada ao this</param>
+        /// <returns>Soma das duas matrizes</returns>
         public ListaCruzada somar(ListaCruzada lista)
         {
             if (lista == null)
@@ -295,6 +327,11 @@ namespace MatrizesEsparsas
             return ret;
         }
 
+        /// <summary>
+        /// Multiplica duas matrizes
+        /// </summary>
+        /// <param name="outra">Matriz a ser multiplicada ao this</param>
+        /// <returns>Matriz da multiplicação das duas matrizes</returns>
         public ListaCruzada multiplicar(ListaCruzada outra)
         {
             if (qtasColunas != outra.qtasLinhas || outra==null)
