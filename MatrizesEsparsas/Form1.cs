@@ -21,7 +21,7 @@ namespace MatrizesEsparsas
         }
 
         private void btnAbrirArquivo_Click(object sender, EventArgs e)
-        {
+        {            
             lerArquivo(dgvMatriz,ref  matriz1);                        
         }
 
@@ -87,9 +87,18 @@ namespace MatrizesEsparsas
 
         private void dgvMatriz_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (matriz1.ValorDe(e.ColumnIndex, e.RowIndex) == 0)
-                matriz1.Inserir(new Celula(Convert.ToDouble(dgvMatriz.Rows[e.RowIndex].Cells[e.ColumnIndex].Value), e.RowIndex, e.ColumnIndex, null, null));
+            if (matriz1.ValorDe(e.ColumnIndex, e.RowIndex) != 0)
+                matriz1.RemoverDePosicao(e.ColumnIndex, e.RowIndex);
 
+            matriz1.Inserir(new Celula(Convert.ToDouble(dgvMatriz.Rows[e.RowIndex].Cells[e.ColumnIndex].Value), e.RowIndex, e.ColumnIndex, null, null));
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (matriz2.ValorDe(e.ColumnIndex, e.RowIndex) != 0)
+                matriz2.RemoverDePosicao(e.ColumnIndex, e.RowIndex);
+
+            matriz2.Inserir(new Celula(Convert.ToDouble(dgvMatriz.Rows[e.RowIndex].Cells[e.ColumnIndex].Value), e.RowIndex, e.ColumnIndex, null, null));
         }
 
         private void btnSomarMatriz_Click(object sender, EventArgs e)

@@ -32,7 +32,6 @@
             this.dlgAbrirArq = new System.Windows.Forms.OpenFileDialog();
             this.btnAbrirArquivo = new System.Windows.Forms.Button();
             this.dlgSalvar = new System.Windows.Forms.SaveFileDialog();
-            this.btnSalvar = new System.Windows.Forms.Button();
             this.grbOutraMatriz = new System.Windows.Forms.GroupBox();
             this.btnMultiplicarMatriz = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -90,16 +89,6 @@
             // 
             this.dlgSalvar.DefaultExt = "*.txt";
             // 
-            // btnSalvar
-            // 
-            this.btnSalvar.Location = new System.Drawing.Point(811, 450);
-            this.btnSalvar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(105, 70);
-            this.btnSalvar.TabIndex = 2;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            // 
             // grbOutraMatriz
             // 
             this.grbOutraMatriz.Controls.Add(this.btnMultiplicarMatriz);
@@ -137,6 +126,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(482, 294);
             this.dataGridView1.TabIndex = 11;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnSomarMatriz
             // 
@@ -250,7 +240,6 @@
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.grbOutraMatriz);
-            this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.btnAbrirArquivo);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -273,7 +262,6 @@
         private System.Windows.Forms.OpenFileDialog dlgAbrirArq;
         private System.Windows.Forms.Button btnAbrirArquivo;
         private System.Windows.Forms.SaveFileDialog dlgSalvar;
-        private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.GroupBox grbOutraMatriz;
         private System.Windows.Forms.Button btnMultiplicarMatriz;
         private System.Windows.Forms.Button btnSomarMatriz;
