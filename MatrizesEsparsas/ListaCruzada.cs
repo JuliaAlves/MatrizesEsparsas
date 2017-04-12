@@ -40,7 +40,7 @@ namespace MatrizesEsparsas
             }
         }
         /// <summary>
-        /// Construtos
+        /// Construtor, faz a estrutura da matriz criando os "nós cabeças"
         /// </summary>
         /// <param name="colunas">Número de colunas</param>
         /// <param name="linhas">Número de linhas</param>
@@ -70,6 +70,7 @@ namespace MatrizesEsparsas
                 primeira.Direita.Abaixo = primeira.Direita;
                 primeira = primeira.Direita;
             }
+            //primeira continua fixa
             primeira.Direita = aux;
             primeira = primeira.Direita;
 
