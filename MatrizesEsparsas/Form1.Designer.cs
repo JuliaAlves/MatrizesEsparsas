@@ -55,14 +55,20 @@
             // 
             // dgvMatriz
             // 
+            this.dgvMatriz.AllowUserToAddRows = false;
+            this.dgvMatriz.AllowUserToDeleteRows = false;
+            this.dgvMatriz.AllowUserToResizeColumns = false;
+            this.dgvMatriz.AllowUserToResizeRows = false;
             this.dgvMatriz.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMatriz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatriz.Location = new System.Drawing.Point(4, 60);
             this.dgvMatriz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvMatriz.Name = "dgvMatriz";
+            this.dgvMatriz.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvMatriz.Size = new System.Drawing.Size(474, 296);
             this.dgvMatriz.TabIndex = 0;
+            this.dgvMatriz.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatriz_CellValueChanged);
             // 
             // dlgAbrirArq
             // 
@@ -120,6 +126,17 @@
             this.btnMultiplicarMatriz.Text = "Multiplicar";
             this.btnMultiplicarMatriz.UseVisualStyleBackColor = true;
             this.btnMultiplicarMatriz.Click += new System.EventHandler(this.btnMultiplicarMatriz_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 62);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(482, 294);
+            this.dataGridView1.TabIndex = 11;
             // 
             // dataGridView1
             // 
