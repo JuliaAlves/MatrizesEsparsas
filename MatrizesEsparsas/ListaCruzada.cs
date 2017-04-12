@@ -89,7 +89,6 @@ namespace MatrizesEsparsas
             aux = atualLinha.Direita;
             atualLinha.Direita = aIncluir;
             aIncluir.Direita = aux;
-
         }
         
         public double ValorDe(int col, int row)
