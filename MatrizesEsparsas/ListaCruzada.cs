@@ -75,7 +75,10 @@ namespace MatrizesEsparsas
             primeira = primeira.Direita;
 
         }
-
+        /// <summary>
+        /// Insere uma nova célula na matriz
+        /// </summary>
+        /// <param name="aIncluir">Célula a ser incluida</param>
         public void Inserir(Celula aIncluir)
         {
             if (aIncluir.Valor == 0)
@@ -90,7 +93,7 @@ namespace MatrizesEsparsas
             posicionarEmLinha(aIncluir.Linha);
 
             while(atualColuna.Abaixo.Linha< atualLinha.Linha && atualColuna.Abaixo.Linha!=-1)
-                atualColuna = atualColuna.Abaixo;
+                atualColuna = atualColuna.Abaixo;//coloca na coluna certa
 
             aux=atualColuna.Abaixo;
             atualColuna.Abaixo = aIncluir;
@@ -176,8 +179,11 @@ namespace MatrizesEsparsas
 
             while(atualColuna.Linha < linha)            
                 atualColuna = atualColuna.Abaixo;
-            
-            Remover(atualColuna);
+
+            if (atualColuna.Linha == linha)
+                Remover(atualColuna);
+            else
+                throw new Exception("Posição inválida");
         }
 
         public void Remover(Celula aRemover)
